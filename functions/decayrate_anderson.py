@@ -8,7 +8,7 @@ ctx.dps = 200
 
 def compute_gap(L, W, seed, J, gamma_1L, gamma_2L, gamma_1R=0, gamma_2R=0):
 
-    filename = f'L{L}_W{W}_seed{seed}_J{J}_G1L{gamma_1L}_G2L{gamma_2L}_G1R{gamma_1R}_G2R{gamma_2R}'
+    filename = f'./data/L{L}/W{W}/L{L}_W{W}_seed{seed}_J{J}_G1L{gamma_1L}_G2L{gamma_2L}_G1R{gamma_1R}_G2R{gamma_2R}'
     print('Seed', seed)
     J = [J]
     M = build_M_matrix_edge_baths_prec(L, gamma_1L, gamma_2L, gamma_1R, gamma_2R)
