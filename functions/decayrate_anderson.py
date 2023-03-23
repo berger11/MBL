@@ -1,9 +1,11 @@
-import numpy as np
-import mpmath
 from flint import acb_mat, ctx
-from precision_functions import *
+import numpy as np
+from functions.precision_functions import *
+
 
 ctx.dps = 200
+
+
 def compute_gap(L, W, seed, J, gamma_1L, gamma_2L, gamma_1R=0, gamma_2R=0):
 
     filename = f'L{L}_W{W}_seed{seed}_J{J}_G1L{gamma_1L}_G2L{gamma_2L}_G1R{gamma_1R}_G2R{gamma_2R}'
@@ -35,6 +37,6 @@ def compute_gap(L, W, seed, J, gamma_1L, gamma_2L, gamma_1R=0, gamma_2R=0):
             gap = np.real(w[j])
     gap = 2 * gap
     log_gap = float(gap.log())
-    value = np.array([log_gap, L, W, seed, J, gamma_1L, gamma_2L, gamma_1R, gamma_2R])
+    value = np.array([log_gap, L, W, seed, J[0], gamma_1L, gamma_2L, gamma_1R, gamma_2R])
 
-    np.save(filename, value)
+    return filename, value
