@@ -9,4 +9,4 @@ args = parser.parse_args()
 
 filename, value = compute_gap(5, 1, args.seed, 0.25, 0.5, 0.5)
 
-np.save(filename, value)
+#np.save(filename, value)
