@@ -24,4 +24,4 @@ gamma_2R = conf["gamma_2R"]
 
 filename, value = compute_gap(L, W, seed, J, gamma_1L, gamma_2L, gamma_1R, gamma_2R)
 
-np.save(f"data/L{L}/W{W}/{seed}", value)
+np.save(f"data/L{L}/W{W}/ind{args.index}_seed{seed}", value)
