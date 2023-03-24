@@ -117,4 +117,6 @@ dependencies:
       - flint-py==0.3.7
       - mpmath==1.2.1
       - pyqt5-sip==12.11.0
+      - tomli==2.0.1
+      - tomli-w==1.0.0
 prefix: /home/viktor/miniconda3/envs/MBL
