@@ -10,29 +10,26 @@ def build_majorana_hamiltonian_disorderedXY_prec(L, J_x, J_y, h, seed=None):
     # If the array has two entries, the parameter will be drawn from a uniform distribution with lower and upper bound given by the first and second entry respectively
     # Returns a 2L x 2L mpmath matrix
 
-    #G = np.zeros((2 * L, 2 * L), dtype=np.complex_)
     G = mpmath.matrix(2*L)
+
+    if seed is not None:
+        np.random.seed(seed)
+
     for m in range(1, L+1):
         if len(h) == 1:
             G[2*m-2, 2*m-1] -= 1j * h[0]
         elif len(h) == 2:
-            if seed is not None:
-                np.random.seed(seed)
             G[2*m-2, 2*m-1] -= 1j * np.random.uniform(low=h[0], high=h[1])
 
         if m != L:
             if len(J_x) == 1:
                 G[2*m-1, 2*m] -= 1j * J_x[0]
             elif len(J_x) == 2:
-                if seed is not None:
-                    np.random.seed(seed)
                 G[2*m-1, 2*m] -= 1j * np.random.uniform(low=J_x[0], high=J_x[1])
 
             if len(J_y) == 1:
                 G[2*m-2, 2*m + 1] += 1j * J_y[0]
             elif len(J_y) == 2:
-                if seed is not None:
-                    np.random.seed(seed)
                 G[2*m-2, 2*m+1] += 1j * np.random.uniform(low=J_y[0], high=J_y[1])
 
     G = 0.5 * (G - G.T)
