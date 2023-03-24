@@ -1,3 +1,5 @@
 .idea/
 **/Scripts
 /data
+/configs
+create_configs.py
