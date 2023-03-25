@@ -64,7 +64,7 @@ dependencies:
   - libxslt=1.1.35=h4e12654_0
   - llvm-openmp=14.0.6=h9e868ea_0
   - lz4-c=1.9.4=h6a678d5_0
-  - matplotlib=3.7.1=py310h06a4308_0
+  - matplotlib=3.7.1=py310h06a4308_1
   - matplotlib-base=3.7.1=py310h1128e8f_0
   - mkl=2021.4.0=h06a4308_640
   - mkl-service=2.4.0=py310h7f8727e_0
