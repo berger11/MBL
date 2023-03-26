@@ -3,3 +3,4 @@
 /data
 /configs
 create_configs.py
+scan_data.py
