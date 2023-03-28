@@ -15,7 +15,6 @@ def build_hamiltonian_anderson(L, t, W):
             elif i == j:
                 h = np.random.rand()
                 h = (h - 0.5) * 2*W
-                print(h)
                 H[i, j] = h
 
     return H
