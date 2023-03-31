@@ -55,7 +55,6 @@ def eigen_aubryandre(L, lambd, t, gamma_1L, gamma_2L, gamma_1R, gamma_2R, comp_v
     H = build_hamiltonian_aubry_andre(L, t, lambd)
     G = convert_to_majorana(H)
     G = mpmath.matrix(G)
-    G = acb_mat(G)
     A = build_shape_matrix_prec(G, M)
 
     B = acb_mat(A)
