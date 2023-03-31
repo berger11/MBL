@@ -46,5 +46,5 @@ elif args.model == "aubry_andre":
 
 for L in args.length:
     for W in args.disorder:
-        if not os.path.exists(f"data/L{L}/W{W}"):
-            os.makedirs(f"data/L{L}/W{W}")
+        if not os.path.exists(f"data_{args.model}/L{L}/W{W}"):
+            os.makedirs(f"data_{args.model}/L{L}/W{W}")
