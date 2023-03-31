@@ -40,4 +40,4 @@ elif conf["model"] == "aubry_andre":
 
     value = eigen_aubryandre(L, lambd, t, gamma_1L, gamma_2L, gamma_1R, gamma_2R, eigvecs)
 
-    np.save(f"data_aubryandre/L{L}/W{W}/aubryandre_ind{args.index}", value)
+    np.save(f"data_aubryandre/L{L}/lambd{lambd}/aubryandre_ind{args.index}", value)
