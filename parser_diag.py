@@ -30,7 +30,7 @@ if conf["model"] == "anderson":
 elif conf["model"] == "aubry_andre":
 
     L = conf["length"]
-    lambd = conf["disorder"]
+    W = conf["disorder"]
     t = conf["J"]
     gamma_1L = conf["gamma_1L"]
     gamma_2L = conf["gamma_2L"]
@@ -38,6 +38,6 @@ elif conf["model"] == "aubry_andre":
     gamma_2R = conf["gamma_2R"]
     eigvecs = conf["vectors"]
 
-    value = eigen_aubryandre(L, lambd, t, gamma_1L, gamma_2L, gamma_1R, gamma_2R, eigvecs)
+    value = eigen_aubryandre(L, W, t, gamma_1L, gamma_2L, gamma_1R, gamma_2R, eigvecs)
 
-    np.save(f"data_aubry_andre/L{L}/lambd{lambd}/aubryandre_ind{args.index}", value)
+    np.save(f"data_aubry_andre/L{L}/W{W}/aubryandre_ind{args.index}", value)
