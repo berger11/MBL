@@ -25,7 +25,7 @@ if conf["model"] == "anderson":
 
     value = eigen_anderson(L, W, seed, J, gamma_1L, gamma_2L, gamma_1R, gamma_2R, eigvecs)
 
-    np.save(f"data/L{L}/W{W}/anderson_ind{args.index}_seed{seed}", value)
+    np.save(f"data_anderson/L{L}/W{W}/anderson_ind{args.index}_seed{seed}", value)
 
 elif conf["model"] == "aubry":
 
@@ -40,4 +40,4 @@ elif conf["model"] == "aubry":
 
     value = eigen_aubryandre(L, lambd, t, gamma_1L, gamma_2L, gamma_1R, gamma_2R, eigvecs)
 
-    np.save(f"data/L{L}/W{W}/aubryandre_ind{args.index}", value)
+    np.save(f"data_aubryandre/L{L}/W{W}/aubryandre_ind{args.index}", value)
