@@ -27,7 +27,7 @@ if conf["model"] == "anderson":
 
     np.save(f"data_anderson/L{L}/W{W}/anderson_ind{args.index}_seed{seed}", value)
 
-elif conf["model"] == "aubry":
+elif conf["model"] == "aubry_andre":
 
     L = conf["length"]
     lambd = conf["disorder"]
