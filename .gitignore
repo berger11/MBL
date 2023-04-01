@@ -2,4 +2,7 @@
 **/Scripts
 /data
 /configs
-scan_data.py
+/logs
+/data_aubry_andre
+/data_anderson
+/npy_data
