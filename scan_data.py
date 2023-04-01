@@ -35,7 +35,7 @@ split_name = args.directory.split("_")
 if split_name[1] == "aubry":
     for L_ind, L in enumerate(L_list):
         for W_ind, W in enumerate(W_list):
-
+            print(f"L{L} W{W}")
             path = f"./{args.directory}/L{L}/W{W}"
             file_count = 0
             for entry in os.scandir(path):
