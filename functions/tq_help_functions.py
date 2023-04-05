@@ -134,24 +134,6 @@ def compute_spectrum(beta):
     return spectrum
 
 
-def build_majorana_hamiltonian_homogenousXY(L, J_x, J_y, h):
-    # Builds the Hamiltonian in the Majorana basis of the homogenous XY model (Prosen sec. 4.1)
-    # Returns a 2L x 2L numpy array
-
-    G = np.zeros((2*L, 2*L), dtype=np.complex_)
-
-    for m in range(1, L+1):
-
-        G[2*m-2, 2*m-1] -= 1j * h
-        if m != L:
-            G[2*m-1, 2*m] -= 1j * J_x
-            G[2*m-2, 2*m + 1] += 1j * J_y
-
-    G = 0.5 * (G - G.T)
-
-    return G
-
-
 def build_majorana_hamiltonian_disorderedXY(L, J_x, J_y, h, seed=None):
     # Builds the Hamiltonian in the Majorana basis of the disordered XY model (Prosen eq. (52))
     # J_x, J_y and h are numpy arrays with either one or two entries
