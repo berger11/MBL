@@ -1,7 +1,5 @@
 import tomli_w
 import os
-import itertools
-import numpy as np
 import argparse
 
 parser = argparse.ArgumentParser(description='Creates config files for simulations')
