@@ -15,6 +15,7 @@ parser.add_argument('--G2L', type=float, nargs='?', default=0.5)  # Bath couplin
 parser.add_argument('--G1R', type=float, nargs='?', default=0)    # Bath coupling to sigma_L^-
 parser.add_argument('--G2R', type=float, nargs='?', default=0)    # Bath coupling to sigma_L^+
 parser.add_argument('--vectors', action='store_true')             # Whether to compute eigenvectors or not
+parser.add_argument('--prec', type=int, nargs='?', default=200)   # Decimal precision when diagonalizing
 args = parser.parse_args()
 
 if not os.path.exists(f'configs/{args.sim_name}_configs'):
