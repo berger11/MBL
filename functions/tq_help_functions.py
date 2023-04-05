@@ -20,7 +20,7 @@ def build_hamiltonian_anderson(L, t, W):
     return H
 
 
-def build_hamiltonian_aubry_andre(L, t, lambd):
+def build_hamiltonian_aubry_andre(L, t, lambd, phase=0):
     # Returns the Hamiltonian, an LxL numpy array, of the one-dimensional Aubry-André model with L sites.
     # t is the hopping amplitude, lambd is the disorder strength
 
@@ -33,7 +33,7 @@ def build_hamiltonian_aubry_andre(L, t, lambd):
             if i == j + 1 or i + 1 == j:
                 H[i, j] = t
             elif i == j:
-                H[i, j] = lambd * np.cos(2 * np.pi * x * (i+1))
+                H[i, j] = lambd * np.cos(2 * np.pi * x * (i+1) + phase)
 
     return H
 
