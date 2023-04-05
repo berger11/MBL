@@ -4,7 +4,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Creates config files for simulations')
 
-parser.add_argument('--sim_name', type=str)                       # Name of directory where data is saved
+parser.add_argument('--sim_name', type=str)                       # Name of simulation
 parser.add_argument('--model', type=str)                          # Which Hamiltonian to use
 parser.add_argument('--length', type=int, nargs='+')              # System sizes
 parser.add_argument('--disorder', type=float, nargs='+')          # Disorder values
