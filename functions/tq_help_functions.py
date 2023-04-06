@@ -1,11 +1,14 @@
 import numpy as np
 from scipy.stats import ortho_group
 
-def build_hamiltonian_anderson(L, t, W):
+def build_hamiltonian_anderson(L, t, W, seed=None):
     # Returns the Hamiltonian, an LxL numpy array, of the one-dimensional Anderson model with L sites.
     # t is the hopping amplitude, W is the disorder strength
 
     H = np.zeros((L, L))
+
+    if seed is not None:
+        np.random.seed(seed)
 
     for i in range(L):
         for j in range(L):
@@ -20,12 +23,17 @@ def build_hamiltonian_anderson(L, t, W):
     return H
 
 
-def build_hamiltonian_aubry_andre(L, t, lambd, phase=0):
+def build_hamiltonian_aubry_andre(L, t, lambd, seed=None):
     # Returns the Hamiltonian, an LxL numpy array, of the one-dimensional Aubry-André model with L sites.
     # t is the hopping amplitude, lambd is the disorder strength
 
     H = np.zeros((L, L))
     x = 0.5*(np.sqrt(5) - 1)
+
+    if seed is not None:
+        np.random.seed(seed)
+
+    phase = np.random.uniform(low=0, high=2*np.pi)
 
     for i in range(L):
         for j in range(L):
