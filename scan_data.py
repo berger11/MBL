@@ -3,64 +3,80 @@ import os
 from statistics import mean
 import argparse
 from functions.flint_help_functions import string_to_acb
-from flint import arb, acb, acb_mat, ctx
+from flint import arb, ctx
 # Scans data from a given directory and computes the 10-log of the gap, and saves the values to an array
 
 ctx.dps = 300
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--directory', type=str)
-parser.add_argument('--filename', type=str)
+parser.add_argument('--sim_name', type=str)  # Name of simulation to scan data from
+parser.add_argument('--file_name', type=str)  # Name of file to save data to
 args = parser.parse_args()
 L_list = []
 W_list = []
 
-for subdir, dirs, files in os.walk(args.directory):
+for subdir, dirs, files in os.walk(f'data/{args.sim_name}_data'):
     print(subdir)
-    subdir_split = subdir.split("/")
+    subdir_split = subdir.split('/')
     last = subdir_split[-1]
-    if last[0] == "L":
+    if last[0] == 'L':
         number = last[1:]
         if int(number) not in L_list:
             L_list.append(int(number))
-    if last[0] == "W":
+    if last[0] == 'W':
         number = last[1:]
         if float(number) not in W_list:
             W_list.append(float(number))
 
-
 values = np.zeros((len(L_list), len(W_list)))
-
-split_name = args.directory.split("_")
-if split_name[1] == "aubry":
-    for L_ind, L in enumerate(L_list):
-        for W_ind, W in enumerate(W_list):
-            print(f"L{L} W{W}")
-            path = f"./{args.directory}/L{L}/W{W}"
-            file_count = 0
-            for entry in os.scandir(path):
-                data = np.load(path+"/"+entry.name, allow_pickle=True)
-                comp_vecs = data[-1]
-                if comp_vecs:
-                    spectrum = data[0][0]
-                else:
-                    spectrum = data[0]
-                for i in range(4*L):
-                    spectrum[i] = string_to_acb(spectrum[i])
-                gap = np.abs(np.real(spectrum[0]))
-                for j in range(len(spectrum)):
-                    if 0 < np.real(spectrum[j]) < gap:
-                        gap = np.real(spectrum[j])
-                gap = 2 * gap
-                log_gap = float(gap.log() / arb(10).log())
-                values[L_ind, W_ind] = log_gap
-                file_count += 1
-
+L_list = np.sort(L_list)
+W_list = np.sort(W_list)
+print(L_list)
+print(W_list)
+for L_ind, L in enumerate(L_list):
+    for W_ind, W in enumerate(W_list):
+        print(f'L{L} W{W}')
+        path = f'data/{args.sim_name}_data/L{L}/W{W}'
+        log_gap_avg = 0
+        data_count = 0
+        for entry in os.scandir(path):
+            data = np.load(f'{path}/{entry.name}', allow_pickle=True)
+            config = data[-1]
+            vectors = config['vectors']
+            eigen = data[0]
+            if vectors:
+                spectrum = eigen[0]
+            else:
+                spectrum = eigen
             try:
-                assert file_count == 1
+                assert L == config['length']
+                assert W == config['disorder']
             except AssertionError:
-                print(f"WARNING: MORE/LESS THAN ONE FILE FOUND FOR L{L} W{W} FOR AUBRY-ANDRE MODEL")
+                print('WARNING: DIRECTORY STRUCTURE AND CONFIG FILES NOT IN AGREEMENT')
+            #print(spectrum)
+            #print('hejhjejhejhjejhjehjejhjejhjejhjehjjehjehjjehjjehje')
+            for i in range(4*L):
+                spectrum[i] = string_to_acb(spectrum[i])  # Converts the eigenvalues from strings back to acb
+            #print(spectrum)
+            gap = np.abs(np.real(spectrum[0]))
+            for j in range(len(spectrum)):
+                if 0 < np.real(spectrum[j]) < gap:
+                    gap = np.real(spectrum[j])
+            gap = 2 * gap
+            log_gap = float(gap.log() / arb(10).log())
+            #log_gap = float(gap.log())
+            print('log gap', log_gap)
+            log_gap_avg += log_gap
+            data_count += 1
+        try:
+            assert data_count == config['reals']
+        except AssertionError:
+            print('WARNING: NUMBER OF FILES NOT EQUAL TO NUMBER OF REALIZATIONS IN CONFIG FILE')
+        log_gap_avg = log_gap_avg / data_count
+        assert values[L_ind, W_ind] == 0
+        values[L_ind, W_ind] = log_gap_avg
 
-np.save(f"npy_data/{args.filename}", values)
+np.save(f'npy_data/{args.file_name}', values)
+
 
 
