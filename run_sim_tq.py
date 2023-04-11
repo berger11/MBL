@@ -17,4 +17,4 @@ for entry in os.scandir(f'configs/{args.sim_name}_configs'):
     if args.run_local:
         os.system(f'bash _localbash {args.sim_name} {config["reals"]} {config_index}')
     else:
-        os.system(f'bash sbatch submit_to_queue')
+        os.system(f'sbatch submit_to_queue {args.sim_name} {config["reals"]} {config_index}')
