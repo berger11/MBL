@@ -78,4 +78,3 @@ for L_ind, L in enumerate(L_list):
 np.save(f'npy_data/{args.file_name}', values)
 
 
-
