@@ -17,10 +17,11 @@ data = np.zeros((len(L_list), len(W_list), reals))
 
 for L_ind, L in np.ndenumerate(L_list):
     for W_ind, W in np.ndenumerate(W_list):
-
+        print(f'L{L}, W{W}')
         path = f'data_anderson_old_only_spec/L{L}/W{W}'
         data_count = 0
         for entry in os.scandir(path):
+            print(data_count)
             data = np.load(f'{path}/{entry.name}', allow_pickle=True)
             ln_gap = data[0]
             log10_gap = ln_gap / np.log(10)
